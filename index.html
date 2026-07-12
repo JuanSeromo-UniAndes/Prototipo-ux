@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutas Reales — Carrera en el Sector Público</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            color: #1e3a5f;
+            background: #ffffff;
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 160, 0, 0.05);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stat-badge {
+            display: inline-block;
+            background: rgba(255, 160, 0, 0.2);
+            border: 2px solid #ffa000;
+            border-radius: 50px;
+            padding: 12px 24px;
+            margin-bottom: 24px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffa000;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin: 24px 0;
+            line-height: 1.2;
+            animation: fadeInDown 1s ease-out 0.2s both;
+        }
+
+        .hero p {
+            font-size: 20px;
+            opacity: 0.95;
+            margin-bottom: 16px;
+            animation: fadeInDown 1s ease-out 0.4s both;
+        }
+
+        .hero-subtext {
+            font-size: 16px;
+            opacity: 0.85;
+            margin-top: 32px;
+            animation: fadeInDown 1s ease-out 0.6s both;
+        }
+
+        /* ==================== SECTION: TRAYECTORIAS REALES ==================== */
+        .trayectorias-section {
+            padding: 80px 20px;
+            background: #f8f9fa;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .trayectorias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .trayectoria-card {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideUp 0.8s ease-out backwards;
+        }
+
+        .trayectoria-card:nth-child(1) { animation-delay: 0s; }
+        .trayectoria-card:nth-child(2) { animation-delay: 0.2s; }
+        .trayectoria-card:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .trayectoria-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .perfil-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 16px;
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffa000, #ff7f00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        .perfil-info h3 {
+            font-size: 16px;
+            color: #1e3a5f;
+            margin-bottom: 4px;
+        }
+
+        .perfil-info p {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e0e0e0;
+        }
+
+        .timeline-item {
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border: 2px solid #ffa000;
+            border-radius: 50%;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .cargo-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e3a5f;
+            margin-bottom: 6px;
+        }
+
+        .cargo-years {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .acceso-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .acceso-merito {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .acceso-referido {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .acceso-conexion {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* ==================== SECTION: DIFERENCIADORES ==================== */
+        .diferenciadores-section {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .diferenciadores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            text-align: center;
+            animation: slideUp 0.8s ease-out backwards;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.4s; }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #1e3a5f, #2c5282);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            color: #1e3a5f;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* ==================== SECTION: OBJECIÓN/CONFIANZA ==================== */
+        .trust-section {
+            padding: 80px 20px;
+            background: #f8f9fa;
+        }
+
+        .trust-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 48px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .trust-section h2 {
+            font-size: 28px;
+            color: #1e3a5f;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        .trust-item {
+            margin-bottom: 32px;
+        }
+
+        .trust-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .trust-item h3 {
+            font-size: 16px;
+            color: #ffa000;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .trust-item h3::before {
+            content: '✓';
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: #ffa000;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 12px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .trust-item p {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* ==================== SECTION: CTA ==================== */
+        .cta-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            font-size: 16px;
+            opacity: 0.95;
+            margin-bottom: 32px;
+        }
+
+        .email-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .email-input {
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            width: 100%;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .email-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 160, 0, 0.3);
+        }
+
+        .cta-button {
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            background: #ffa000;
+            color: #1e3a5f;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button:hover {
+            background: #ff8c00;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        .cta-disclaimer {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 16px;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+            font-size: 14px;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: #1a2b47;
+            color: #aaa;
+            text-align: center;
+            padding: 32px 20px;
+            font-size: 12px;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .trayectorias-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .trust-content {
+                padding: 32px;
+            }
+
+            .cta-section h2 {
+                font-size: 28px;
+            }
+
+            .email-form {
+                flex-direction: column;
+            }
+
+            .cta-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="stat-badge">El 63% de los contratistas del sector público no sabe cómo llegaron otros a un cargo específico</div>
+            <h1>¿Cómo creces en el Estado si no sabes cómo otros crecieron?</h1>
+            <p>La mayoría de profesionales en el sector público construyen su carrera en la incertidumbre.</p>
+            <div class="hero-subtext">No saben si los ascensos se consiguen por mérito, concurso, referidos internos o conexiones políticas.</div>
+        </div>
+    </section>
+
+    <!-- ==================== TRAYECTORIAS REALES ==================== -->
+    <section class="trayectorias-section">
+        <h2 class="section-title">Ver cómo otros llegaron ahí</h2>
+        <p class="section-subtitle">Trayectorias reales de profesionales del sector público. Datos verificados, identidades anonimizadas.</p>
+        
+        <div class="trayectorias-grid">
+            <!-- PERFIL 1 -->
+            <div class="trayectoria-card">
+                <div class="perfil-header">
+                    <div class="avatar">AB</div>
+                    <div class="perfil-info">
+                        <h3>Abogada — Orden Nacional</h3>
+                        <p>Agencia Nacional de Tierras • 3 años</p>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="cargo-title">Contratista — Apoyo Jurídico</div>
+                        <div class="cargo-years">1-2 años</div>
+                        <span class="acceso-badge acceso-referido">Referido Interno</span>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="cargo-title">Contratista — Desarrollo Procedimiento</div>
+                        <div class="cargo-years">2-4 años (actual)</div>
+                        <span class="acceso-badge acceso-merito">Convocatoria Abierta</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERFIL 2 -->
+            <div class="trayectoria-card">
+                <div class="perfil-header">
+                    <div class="avatar">DG</div>
+                    <div class="perfil-info">
+                        <h3>Diseñador Gráfico — Misional</h3>
+                        <p>Centro de Memoria Histórica • Menos de 1 año</p>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="cargo-title">Contratista — Visualización de Datos</div>
+                        <div class="cargo-years">1-2 años</div>
+                        <span class="acceso-badge acceso-merito">Convocatoria Abierta</span>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="cargo-title">Contratista — Diseño Gráfico</div>
+                        <div class="cargo-years">4+ años</div>
+                        <span class="acceso-badge acceso-referido">Referido Interno</span>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="cargo-title">Diseñador Gráfico (actual)</div>
+                        <div class="cargo-years">Menos de 1 año</div>
+                        <span class="acceso-badge acceso-referido">Referido Interno</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERFIL 3 -->
+            <div class="trayectoria-card">
+                <div class="perfil-header">
+                    <div class="avatar">EP</div>
+                    <div class="perfil-info">
+                        <h3>Enlace Territorial — Amazonia</h3>
+                        <p>Instituto Colombiano de Antropología • 2-4 años</p>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="cargo-title">Contratista — Enlace Territorial</div>
+                        <div class="cargo-years">6 meses - 1 año</div>
+                        <span class="acceso-badge acceso-referido">Referido Interno</span>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="cargo-title">Enlace Territorial Nororiente (actual)</div>
+                        <div class="cargo-years">2-4 años</div>
+                        <span class="acceso-badge acceso-referido">Referido Interno</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== DIFERENCIADORES ==================== -->
+    <section class="diferenciadores-section">
+        <h2 class="section-title">¿Qué nos diferencia?</h2>
+        <p class="section-subtitle">No es solo un directorio de cargos. Es un mapa de cómo otros crecieron.</p>
+        
+        <div class="diferenciadores-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Filtros por tu perfil</h3>
+                <p>Busca desde tu punto de partida: abogado contratista, 3 años, orden nacional. Ve solo trayectorias comparables.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>Datos verificados</h3>
+                <p>Cada trayectoria viene con: cargo, entidad, años en el rol, tipo de vinculación y mecanismo de acceso.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>La información que falta</h3>
+                <p>SIGEP te dice qué cargos existen. Nosotros te mostramos cómo otros llegaron ahí.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== OBJECIÓN: CONFIANZA ==================== -->
+    <section class="trust-section">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 48px;">¿Cómo sabemos que estos datos son reales?</h2>
+        
+        <div class="trust-content">
+            <div class="trust-item">
+                <h3>Las trayectorias vienen de profesionales como tú</h3>
+                <p>Cada perfil es aportado voluntariamente por alguien que ha trabajado en el sector público. No son inventadas, no son ficticias.</p>
+            </div>
+            <div class="trust-item">
+                <h3>Verificamos cada dato antes de publicar</h3>
+                <p>Nombre de la entidad, tipo de vinculación, duración en cada rol — todo se valida. Las identidades se anonomizan; los datos permanecen verificables.</p>
+            </div>
+            <div class="trust-item">
+                <h3>Tu anonimato está protegido</h3>
+                <p>Si decides compartir tu trayectoria, tu nombre no aparece. Lo que sí aparece es el cargo, la entidad (generalizada) y cómo llegaste ahí.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA ==================== -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Acceso anticipado</h2>
+            <p>Sé de los primeros en ver trayectorias reales de profesionales como tú en el sector público.</p>
+            
+            <form id="emailForm" class="email-form" onsubmit="handleSubmit(event)">
+                <input 
+                    type="email" 
+                    class="email-input" 
+                    placeholder="Tu correo electrónico" 
+                    required
+                    aria-label="Correo electrónico"
+                >
+                <button type="submit" class="cta-button">Déjame tu correo</button>
+            </form>
+            
+            <div class="success-message" id="successMessage">
+                ✓ Registrado. Te escribiremos pronto con acceso anticipado.
+            </div>
+            
+            <div class="cta-disclaimer">
+                Sin spam. Acceso exclusivo a la versión beta. Privacidad garantizada.
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <p>Rutas Reales — Mapeando carrera en el sector público colombiano • 2026</p>
+    </footer>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const emailInput = form.querySelector('.email-input');
+            const successMessage = document.getElementById('successMessage');
+            const button = form.querySelector('.cta-button');
+            
+            // Capturar el email (en un experimento real, se enviaría a un servidor)
+            const email = emailInput.value;
+            console.log('Email registrado:', email);
+            
+            // Mostrar mensaje de éxito
+            successMessage.classList.add('show');
+            
+            // Desactivar el botón
+            button.disabled = true;
+            button.textContent = 'Registrado ✓';
+            
+            // Limpiar el input
+            emailInput.value = '';
+            emailInput.disabled = true;
+            
+            // Aquí iría la llamada real a un backend/API
+            // fetch('/api/register-email', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ email })
+            // })
+        }
+    </script>
+
+</body>
+</html>
