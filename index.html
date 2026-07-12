@@ -666,9 +666,10 @@
             <h2>Acceso anticipado</h2>
             <p>Sé de los primeros en ver trayectorias reales de profesionales como tú en el sector público.</p>
             
-            <form id="emailForm" class="email-form" onsubmit="handleSubmit(event)">
+            <form id="emailForm" class="email-form" action="https://formspree.io/f/mqerzykz" method="POST">
                 <input 
-                    type="email" 
+                    type="email"
+                    name="email"
                     class="email-input" 
                     placeholder="Tu correo electrónico" 
                     required
@@ -679,6 +680,10 @@
             
             <div class="success-message" id="successMessage">
                 ✓ Registrado. Te escribiremos pronto con acceso anticipado.
+            </div>
+            
+            <div class="error-message" id="errorMessage" style="display:none;color:#e53e3e;margin-top:12px;font-size:14px;">
+                Ocurrió un error. Por favor intenta nuevamente.
             </div>
             
             <div class="cta-disclaimer">
@@ -693,36 +698,51 @@
     </footer>
 
     <script>
-        function handleSubmit(event) {
+        var form = document.getElementById('emailForm');
+
+        async function handleSubmit(event) {
             event.preventDefault();
-            
-            const form = event.target;
-            const emailInput = form.querySelector('.email-input');
-            const successMessage = document.getElementById('successMessage');
-            const button = form.querySelector('.cta-button');
-            
-            // Capturar el email (en un experimento real, se enviaría a un servidor)
-            const email = emailInput.value;
-            console.log('Email registrado:', email);
-            
-            // Mostrar mensaje de éxito
-            successMessage.classList.add('show');
-            
-            // Desactivar el botón
+
+            var emailInput = form.querySelector('.email-input');
+            var button = form.querySelector('.cta-button');
+            var successMessage = document.getElementById('successMessage');
+            var errorMessage = document.getElementById('errorMessage');
+
             button.disabled = true;
-            button.textContent = 'Registrado ✓';
-            
-            // Limpiar el input
-            emailInput.value = '';
-            emailInput.disabled = true;
-            
-            // Aquí iría la llamada real a un backend/API
-            // fetch('/api/register-email', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({ email })
-            // })
+            button.textContent = 'Enviando...';
+            errorMessage.style.display = 'none';
+
+            try {
+                var response = await fetch(form.action, {
+                    method: form.method,
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    successMessage.classList.add('show');
+                    button.textContent = 'Registrado ✓';
+                    emailInput.value = '';
+                    emailInput.disabled = true;
+                } else {
+                    var data = await response.json();
+                    var msg = data.errors
+                        ? data.errors.map(function(e) { return e.message; }).join(', ')
+                        : 'Ocurrió un error. Por favor intenta nuevamente.';
+                    errorMessage.textContent = msg;
+                    errorMessage.style.display = 'block';
+                    button.disabled = false;
+                    button.textContent = 'Déjame tu correo';
+                }
+            } catch (err) {
+                errorMessage.textContent = 'Error de conexión. Por favor intenta nuevamente.';
+                errorMessage.style.display = 'block';
+                button.disabled = false;
+                button.textContent = 'Déjame tu correo';
+            }
         }
+
+        form.addEventListener('submit', handleSubmit);
     </script>
 
 </body>
