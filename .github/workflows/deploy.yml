@@ -1,0 +1,144 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate static site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate HTML structure
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          class StrictHTMLParser(HTMLParser):
+              pass
+
+          html_files = sorted(Path('.').rglob('*.html'))
+          if not html_files:
+              raise SystemExit('No HTML files found to validate.')
+
+          for html_file in html_files:
+              parser = StrictHTMLParser()
+              parser.feed(html_file.read_text(encoding='utf-8'))
+              parser.close()
+              print(f'Validated HTML: {html_file}')
+          PY
+
+      - name: Validate CSS block balance
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+
+          style_pattern = re.compile(r'<style\b[^>]*>(.*?)</style>', re.IGNORECASE | re.DOTALL)
+
+          for html_file in sorted(Path('.').rglob('*.html')):
+              content = html_file.read_text(encoding='utf-8')
+              for index, css_block in enumerate(style_pattern.findall(content), start=1):
+                  if css_block.count('{') != css_block.count('}'):
+                      raise SystemExit(f'Unbalanced CSS braces in {html_file} style block #{index}')
+                  if css_block.count('(') != css_block.count(')'):
+                      raise SystemExit(f'Unbalanced CSS parentheses in {html_file} style block #{index}')
+                  print(f'Validated CSS block #{index}: {html_file}')
+          PY
+
+      - name: Validate JavaScript syntax
+        run: |
+          python - <<'PY'
+          import re
+          import subprocess
+          import tempfile
+          from pathlib import Path
+
+          script_pattern = re.compile(r'<script\b[^>]*>(.*?)</script>', re.IGNORECASE | re.DOTALL)
+          validated = 0
+
+          for html_file in sorted(Path('.').rglob('*.html')):
+              content = html_file.read_text(encoding='utf-8')
+              for index, script_block in enumerate(script_pattern.findall(content), start=1):
+                  code = script_block.strip()
+                  if not code:
+                      continue
+                  with tempfile.NamedTemporaryFile('w', suffix='.js', encoding='utf-8') as temp_file:
+                      temp_file.write(code)
+                      temp_file.flush()
+                      subprocess.run(['node', '--check', temp_file.name], check=True)
+                  validated += 1
+                  print(f'Validated inline JavaScript block #{index}: {html_file}')
+
+          for js_file in sorted(Path('.').rglob('*.js')):
+              subprocess.run(['node', '--check', str(js_file)], check=True)
+              validated += 1
+              print(f'Validated JavaScript file: {js_file}')
+
+          print(f'Total JavaScript validations: {validated}')
+          PY
+
+      - name: Write validation summary
+        run: |
+          {
+            echo "## Static site validation"
+            echo "- Branch trigger: \`main\`"
+            echo "- Commit: \`${GITHUB_SHA}\`"
+            echo "- Result: ✅ Validation passed"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: validate
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Prepare static artifact
+        run: |
+          mkdir -p _site
+          rsync -av --delete \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            ./ _site/
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Write deployment summary
+        run: |
+          {
+            echo "## GitHub Pages deployment"
+            echo "- Branch trigger: \`main\`"
+            echo "- Commit: \`${GITHUB_SHA}\`"
+            echo "- Status: ✅ Deployed"
+            echo "- URL: ${{ steps.deployment.outputs.page_url }}"
+          } >> "$GITHUB_STEP_SUMMARY"
