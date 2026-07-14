@@ -111,6 +111,25 @@
             animation: fadeInDown 1s ease-out 0.6s both;
         }
 
+        .hero-profiles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 32px;
+            animation: fadeInDown 1s ease-out 0.8s both;
+        }
+
+        .hero-profile-tag {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            padding: 8px 18px;
+            font-size: 14px;
+            font-weight: 500;
+            color: white;
+        }
+
         /* ==================== SECTION: TRAYECTORIAS REALES ==================== */
         .trayectorias-section {
             padding: 80px 20px;
@@ -284,6 +303,30 @@
             border: 1px solid #f5c6cb;
         }
 
+        .siguiente-paso {
+            margin-top: 20px;
+            padding: 14px 16px;
+            background: #eef4ff;
+            border-left: 3px solid #2c5282;
+            border-radius: 6px;
+        }
+
+        .siguiente-paso-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #2c5282;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .siguiente-paso p {
+            font-size: 13px;
+            color: #444;
+            line-height: 1.6;
+            margin: 0;
+        }
+
         /* ==================== SECTION: DIFERENCIADORES ==================== */
         .diferenciadores-section {
             padding: 80px 20px;
@@ -330,6 +373,152 @@
             font-size: 14px;
             color: #666;
             line-height: 1.6;
+        }
+
+        /* ==================== SECTION: ANTES Y DESPUÉS ==================== */
+        .antes-despues-section {
+            padding: 80px 20px;
+            background: #f8f9fa;
+            text-align: center;
+        }
+
+        .antes-despues-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .antes-card,
+        .despues-card {
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .antes-card {
+            background: #fff5f5;
+            border: 2px solid #fed7d7;
+        }
+
+        .despues-card {
+            background: #f0fff4;
+            border: 2px solid #9ae6b4;
+        }
+
+        .antes-header,
+        .despues-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .antes-icon,
+        .despues-icon {
+            font-size: 28px;
+        }
+
+        .antes-header h3 {
+            font-size: 18px;
+            color: #c53030;
+            font-weight: 700;
+        }
+
+        .despues-header h3 {
+            font-size: 18px;
+            color: #276749;
+            font-weight: 700;
+        }
+
+        .antes-lista,
+        .despues-lista {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .antes-lista li,
+        .despues-lista li {
+            font-size: 14px;
+            line-height: 1.7;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .antes-lista li:last-child,
+        .despues-lista li:last-child {
+            border-bottom: none;
+        }
+
+        .antes-lista li::before {
+            content: '✗ ';
+            color: #c53030;
+            font-weight: 700;
+        }
+
+        .despues-lista li::before {
+            content: '✓ ';
+            color: #276749;
+            font-weight: 700;
+        }
+
+        /* ==================== SECTION: QUÉ HACER AHORA ==================== */
+        .que-hacer-section {
+            padding: 80px 20px;
+            background: white;
+            text-align: center;
+        }
+
+        .pasos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .paso-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 32px;
+            position: relative;
+            border-top: 4px solid #ffa000;
+            animation: slideUp 0.8s ease-out backwards;
+        }
+
+        .paso-card:nth-child(1) { animation-delay: 0s; }
+        .paso-card:nth-child(2) { animation-delay: 0.2s; }
+        .paso-card:nth-child(3) { animation-delay: 0.4s; }
+
+        .paso-numero {
+            font-size: 40px;
+            font-weight: 900;
+            color: #e0e0e0;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .paso-card h3 {
+            font-size: 18px;
+            color: #1e3a5f;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .paso-card p {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .paso-accion {
+            font-size: 13px;
+            font-weight: 600;
+            color: #ffa000;
         }
 
         /* ==================== SECTION: OBJECIÓN/CONFIANZA ==================== */
@@ -503,11 +692,30 @@
                 font-size: 16px;
             }
 
+            .hero-profiles {
+                gap: 8px;
+            }
+
+            .hero-profile-tag {
+                font-size: 12px;
+                padding: 6px 14px;
+            }
+
             .section-title {
                 font-size: 28px;
             }
 
             .trayectorias-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .antes-despues-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .pasos-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
@@ -535,17 +743,23 @@
     <!-- ==================== HERO SECTION ==================== -->
     <section class="hero">
         <div class="hero-content">
-            <div class="stat-badge">El 63% de los contratistas del sector público no sabe cómo llegaron otros a un cargo específico</div>
-            <h1>¿Cómo creces en el Estado si no sabes cómo otros crecieron?</h1>
-            <p>La mayoría de profesionales en el sector público construyen su carrera en la incertidumbre.</p>
-            <div class="hero-subtext">No saben si los ascensos se consiguen por mérito, concurso, referidos internos o conexiones políticas.</div>
+            <div class="stat-badge">Para contratistas y profesionales del sector público que quieren crecer</div>
+            <h1>Si estás aquí, otros como tú ya encontraron su próximo cargo — y tú también puedes.</h1>
+            <p>Eres abogado contratista con 2 años de experiencia. O diseñador en una entidad del orden nacional. O enlace territorial que no sabe qué sigue.</p>
+            <div class="hero-subtext">Rutas Reales te muestra exactamente cómo profesionales con tu perfil llegaron a su próximo cargo — por qué mecanismo, en cuánto tiempo, y qué puedes hacer tú ahora mismo.</div>
+            <div class="hero-profiles">
+                <span class="hero-profile-tag">👩‍⚖️ Abogada contratista</span>
+                <span class="hero-profile-tag">🎨 Diseñador misional</span>
+                <span class="hero-profile-tag">📍 Enlace territorial</span>
+                <span class="hero-profile-tag">📊 Analista de políticas</span>
+            </div>
         </div>
     </section>
 
     <!-- ==================== TRAYECTORIAS REALES ==================== -->
     <section class="trayectorias-section">
-        <h2 class="section-title">Ver cómo otros llegaron ahí</h2>
-        <p class="section-subtitle">Trayectorias reales de profesionales del sector público. Datos verificados, identidades anonimizadas.</p>
+        <h2 class="section-title">Así llegaron otros — así puedes llegar tú</h2>
+        <p class="section-subtitle">Trayectorias reales de profesionales como tú. Cada una muestra el mecanismo exacto de acceso y <strong>el paso concreto que sigue</strong>.</p>
         
         <div class="trayectorias-grid">
             <!-- PERFIL 1 -->
@@ -568,6 +782,10 @@
                         <div class="cargo-years">2-4 años (actual)</div>
                         <span class="acceso-badge acceso-merito">Convocatoria Abierta</span>
                     </div>
+                </div>
+                <div class="siguiente-paso">
+                    <div class="siguiente-paso-label">📍 Si tienes su perfil, tu siguiente paso es:</div>
+                    <p>Busca convocatorias abiertas en entidades del orden nacional. Las abogadas con 2+ años en apoyo jurídico acceden por convocatoria en 7 de cada 10 casos.</p>
                 </div>
             </div>
 
@@ -597,6 +815,9 @@
                         <span class="acceso-badge acceso-referido">Referido Interno</span>
                     </div>
                 </div>
+                <div class="siguiente-paso">
+                    <div class="siguiente-paso-label">📍 Si tienes su perfil, tu siguiente paso es:</div>
+                </div>
             </div>
 
             <!-- PERFIL 3 -->
@@ -620,30 +841,96 @@
                         <span class="acceso-badge acceso-referido">Referido Interno</span>
                     </div>
                 </div>
+                <div class="siguiente-paso">
+                    <div class="siguiente-paso-label">📍 Si tienes su perfil, tu siguiente paso es:</div>
+                    <p>Documenta tu impacto territorial con métricas concretas. Los enlaces que ascienden lo hacen por recomendación directa del coordinador regional — hazte visible ante él.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ==================== DIFERENCIADORES ==================== -->
     <section class="diferenciadores-section">
-        <h2 class="section-title">¿Qué nos diferencia?</h2>
-        <p class="section-subtitle">No es solo un directorio de cargos. Es un mapa de cómo otros crecieron.</p>
+        <h2 class="section-title">No solo información — tu ruta concreta</h2>
+        <p class="section-subtitle">Sabes qué cargos existen. Lo que te falta es saber cómo llegar tú a uno de ellos.</p>
         
         <div class="diferenciadores-grid">
             <div class="feature-card">
                 <div class="feature-icon">🎯</div>
-                <h3>Filtros por tu perfil</h3>
-                <p>Busca desde tu punto de partida: abogado contratista, 3 años, orden nacional. Ve solo trayectorias comparables.</p>
+                <h3>Busca desde tu punto de partida</h3>
+                <p>Filtra por tu perfil exacto: abogado contratista, 3 años, orden nacional. Ve solo las trayectorias comparables a la tuya — no las de alguien en otra situación.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🔍</div>
-                <h3>Datos verificados</h3>
-                <p>Cada trayectoria viene con: cargo, entidad, años en el rol, tipo de vinculación y mecanismo de acceso.</p>
+                <div class="feature-icon">🔑</div>
+                <h3>Descubre el mecanismo real de acceso</h3>
+                <p>Para cada cargo: mérito, concurso, referido o conexión política. SIGEP te dice qué cargos existen. Nosotros te mostramos exactamente como tu puedes llegar ahi.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>La información que falta</h3>
-                <p>SIGEP te dice qué cargos existen. Nosotros te mostramos cómo otros llegaron ahí.</p>
+                <div class="feature-icon">📋</div>
+                <h3>Ve tu próximo paso, no solo el destino</h3>
+                <p>Con tu perfil en la plataforma, verás exactamente qué necesitas para llegar a tu próximo cargo — no un listado genérico, sino la ruta específica para ti.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ANTES Y DESPUÉS ==================== -->
+    <section class="antes-despues-section">
+        <h2 class="section-title">Dos formas de buscar tu próximo cargo</h2>
+        <p class="section-subtitle">La diferencia entre buscar en la oscuridad y tener una ruta clara.</p>
+        
+        <div class="antes-despues-grid">
+            <div class="antes-card">
+                <div class="antes-header">
+                    <span class="antes-icon">😟</span>
+                    <h3>Hoy — sin Rutas Reales</h3>
+                </div>
+                <ul class="antes-lista">
+                    <li>Buscas en LinkedIn y SIGEP sin saber si aplica a ti</li>
+                    <li>Preguntas a colegas pero cada experiencia es diferente</li>
+                    <li>No sabes si el cargo que quieres se gana por mérito o por conexión</li>
+                    <li>Envías hojas de vida sin entender el proceso real de selección</li>
+                    <li>Pasas meses sin claridad sobre qué hacer exactamente</li>
+                </ul>
+            </div>
+            <div class="despues-card">
+                <div class="despues-header">
+                    <span class="despues-icon">🎯</span>
+                    <h3>Con Rutas Reales</h3>
+                </div>
+                <ul class="despues-lista">
+                    <li>Ves trayectorias de personas con tu mismo perfil y punto de partida</li>
+                    <li>Sabes exactamente por qué mecanismo llegaron al cargo que quieres</li>
+                    <li>Tienes un paso concreto que puedes tomar esta semana</li>
+                    <li>Entiendes qué competencias o conexiones realmente importan</li>
+                    <li>Pasas de la incertidumbre a una ruta definida y verificada</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== QUÉ HACER AHORA ==================== -->
+    <section class="que-hacer-section">
+        <h2 class="section-title">¿Qué puedes hacer ahora?</h2>
+        <p class="section-subtitle">No basta saber cómo otros llegaron. Necesitas saber qué hacer tú, con tu perfil, esta semana.</p>
+        
+        <div class="pasos-grid">
+            <div class="paso-card">
+                <div class="paso-numero">01</div>
+                <h3>Define tu punto de partida</h3>
+                <p>Cargo actual, años de experiencia, tipo de vinculación, entidad. Con eso, la plataforma filtra las trayectorias que realmente aplican a ti — no las de alguien en otra situación.</p>
+                <div class="paso-accion">→ Ingresa tu perfil al registrarte</div>
+            </div>
+            <div class="paso-card">
+                <div class="paso-numero">02</div>
+                <h3>Ve cómo llegaron los que están donde quieres estar</h3>
+                <p>Encuentra al menos 3 personas con tu perfil que ya llegaron al cargo que buscas. Mira el mecanismo de acceso de cada una. El patrón te dará la respuesta.</p>
+                <div class="paso-accion">→ Explora trayectorias filtradas</div>
+            </div>
+            <div class="paso-card">
+                <div class="paso-numero">03</div>
+                <h3>Ejecuta el paso que la data sugiere</h3>
+                <p>Si el 70% llegó por referido interno, saber quién puede referirte es tu siguiente acción. Si llegaron por convocatoria, preparar tu hoja de vida para ese proceso específico es lo que sigue.</p>
+                <div class="paso-accion">→ Obtén tu recomendación de próximo paso</div>
             </div>
         </div>
     </section>
@@ -671,8 +958,8 @@
     <!-- ==================== CTA ==================== -->
     <section class="cta-section">
         <div class="cta-content">
-            <h2>Acceso anticipado</h2>
-            <p>Sé de los primeros en ver trayectorias reales de profesionales como tú en el sector público.</p>
+            <h2>Descubre tu próximo cargo</h2>
+            <p>Regístrate y ve exactamente cómo profesionales con tu perfil llegaron al cargo que buscas — y cuál es tu primer paso concreto.</p>
             
             <form id="emailForm" class="email-form" action="https://formspree.io/f/mqerzykz" method="POST">
                 <input 
@@ -683,11 +970,11 @@
                     required
                     aria-label="Correo electrónico"
                 >
-                <button type="submit" class="cta-button">Déjame tu correo</button>
+                <button type="submit" class="cta-button">Ver mi ruta personalizada →</button>
             </form>
             
             <div class="success-message" id="successMessage">
-                ✓ Registrado. Te escribiremos pronto con acceso anticipado.
+                ✓ Registrado. Te escribiremos pronto con acceso anticipado a tu ruta personalizada.
             </div>
             
             <div class="error-message" id="errorMessage" style="display:none;color:#e53e3e;margin-top:12px;font-size:14px;">
@@ -695,7 +982,7 @@
             </div>
             
             <div class="cta-disclaimer">
-                Sin spam. Acceso exclusivo a la versión beta. Privacidad garantizada.
+                Sin spam. Acceso exclusivo a la versión beta. Tu perfil permanece privado.
             </div>
         </div>
     </section>
@@ -740,13 +1027,13 @@
                     errorMessage.textContent = msg;
                     errorMessage.style.display = 'block';
                     button.disabled = false;
-                    button.textContent = 'Déjame tu correo';
+                    button.textContent = 'Ver mi ruta personalizada →';
                 }
             } catch (err) {
                 errorMessage.textContent = 'Error de conexión. Por favor intenta nuevamente.';
                 errorMessage.style.display = 'block';
                 button.disabled = false;
-                button.textContent = 'Déjame tu correo';
+                button.textContent = 'Ver mi ruta personalizada →';
             }
         }
 
